@@ -10,6 +10,9 @@ $query->addWhere('user.id', 50, '>');
 $query->addJoin('company', 'company.id = user.company_id');
 $query->addPagination(1, 15);
 $query->addSort('user.create', 'ASC');
+
+print($query->getQuery());
+print_r($query->getParameters());
 ```
 ### Output
 ```
