@@ -78,7 +78,9 @@ print_r($query->getParameters());
 
 #### Output
 ```
-UPDATE aform_job SET firstname = :par_2, lastname = :par_3, city = :par_4 WHERE user_id = :par_1Array
+UPDATE aform_job SET firstname = :par_2, lastname = :par_3, city = :par_4 WHERE user_id = :par_1
+
+Array
 (
     [par_1] => 10
     [par_2] => Ivan
@@ -94,6 +96,7 @@ $query = new queryHelper();
 $query->addTable("user");
 $query->addWhere("id", 10);
 $query->addDelete();
+$query->limit(1);
 
 print($query->getQuery());
 print_r($query->getParameters());
@@ -101,10 +104,11 @@ print_r($query->getParameters());
 
 #### Output
 ```
-DELETE FROM user WHERE id = :par_1
+DELETE FROM user WHERE id = :par_1 LIMIT 1
 
 Array
 (
     [par_1] => 10
 )
+
 ```
