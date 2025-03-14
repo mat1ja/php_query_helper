@@ -28,6 +28,65 @@ Array
 )
 ```
 
+### Insert
+```
+$query = new queryHelper();
+
+$data = array(
+	'firstname' => 'Ivo',
+	'lastname' => 'Horvatic',
+	'city' => 'New York'
+);
+
+$query->addTable("user");
+$query->addInserts($data);
+
+print($query->getQuery());
+print_r($query->getParameters());
+```
+
+#### Output
+```
+INSERT INTO user (firstname, lastname, city) VALUES (:par_1, :par_2, :par_3)
+
+Array
+(
+    [par_1] => Ivo
+    [par_2] => Horvatic
+    [par_3] => New York
+)
+```
+
+### Edit
+```
+$query = new queryHelper();
+
+$data = array(
+	'firstname' => 'Ivan',
+	'lastname' => 'Horvat',
+	'city' => 'New York'
+);
+
+
+$query->addTable("aform_job");
+$query->addWhere("user_id", 10);
+$query->addUpdates($data);
+
+print($query->getQuery());
+print_r($query->getParameters());
+```
+
+#### Output
+```
+UPDATE aform_job SET firstname = :par_2, lastname = :par_3, city = :par_4 WHERE user_id = :par_1Array
+(
+    [par_1] => 10
+    [par_2] => Ivan
+    [par_3] => Horvat
+    [par_4] => New York
+)
+```
+
 ### Delete
 ```
 $query = new queryHelper();
