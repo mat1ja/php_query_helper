@@ -9,7 +9,8 @@ $query = new queryHelper();
 
 $query->addTable('user');
 $query->addField('user.*');
-$query->addWhere('user.id', 50, '>');
+$query->addWhere('user.country', 'New York', 'LIKE');
+$query->addWhere('user.age', 18, '>');
 $query->addJoin('company', 'company.id = user.company_id');
 $query->addPagination(1, 15);
 $query->addSort('user.create', 'ASC');
@@ -20,11 +21,12 @@ print_r($query->getParameters());
 
 #### Output
 ```
-SELECT user.* FROM user JOIN company ON company.id = user.company_id WHERE user.id > :par_1 ORDER BY user.create ASC LIMIT 15 OFFSET 15
+SELECT user.* FROM user JOIN company ON company.id = user.company_id WHERE user.country LIKE CONCAT('%', :par_1, '%') AND user.age > :par_2 ORDER BY user.create ASC LIMIT 15 OFFSET 15
 
 Array
 (
-    [par_1] => 50
+    [par_1] => New York
+    [par_2] => 18
 )
 ```
 
